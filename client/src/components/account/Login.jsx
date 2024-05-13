@@ -63,6 +63,10 @@ const Text = Styled(Typography)`
          font-size: 14px;
 
 `
+const loginInitialValues={
+    username:'',
+    password:''
+}
 const signupInitialValues ={
     name:'',
     username:'',
@@ -74,8 +78,8 @@ const Login = () => {
 
     const [account ,toggleAccount] = useState('login');
     const [signup, setSignup] = useState(signupInitialValues);
-     const[error,setError]=
-     useState("");
+    const [error,setError]=useState(loginInitialValues);
+    const [login,setLogin] = useState()
     const toggleSignup = () =>{
           account ==='Signup' ?toggleAccount("Login"): toggleAccount('Signup');
 
@@ -99,7 +103,13 @@ setError("something went wrong. please try again later");
 
 
 }
+const onValueChange = (e) =>{
+    setLogin({...login, [e.target.name]:e.target.value})
 
+}
+const loginUser = ()=>{
+    
+}
     return (
     <Component>
         <Box>
@@ -107,14 +117,15 @@ setError("something went wrong. please try again later");
            {
               account === 'login' ?
            <Wrapper>
-             <TextField variant='standard' label="Enter username" />
-             <TextField variant='standard' label="Enter password" />
+             <TextField variant='standard'onChange={(e)=>onValueChange(e)} name="username"label="Enter username" />
+             <TextField variant='standard'onChange={(e)=>onValueChange(e)} 
+             name="password"label="Enter password" />
 
 {
     error && <Error>{error}</Error>
 }
 
-             <LoginButton variant='contained'>Login</LoginButton>
+             <LoginButton variant='contained' onClick={()=>loginUser()}>Login</LoginButton>
              <Text style={{ textAlign: 'center'}} >OR</Text>
              <SignupButton onClick={() => toggleSignup()}>Create an Account </SignupButton>
             </Wrapper> 
